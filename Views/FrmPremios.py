@@ -55,6 +55,8 @@ class FrmPremios(wx.Dialog):
         self.listVerde.AppendTextColumn(u'Día', width=80)
         self.listVerde.AppendTextColumn(u'Número', width=80)
         self.listVerde.AppendTextColumn(u'Descripción', width=120)
+        verde = wx.Colour(1,255,112)
+        self.listVerde.SetBackgroundColour(verde)
         bSizer11.Add(self.listVerde, 1, wx.ALL | wx.EXPAND, 5)
 
         bSizer15 = wx.BoxSizer(wx.HORIZONTAL)
@@ -80,6 +82,8 @@ class FrmPremios(wx.Dialog):
         self.listAmarillo.AppendTextColumn(u'Día', width=80)
         self.listAmarillo.AppendTextColumn(u'Número', width=80)
         self.listAmarillo.AppendTextColumn(u'Descripción', width=120)
+        amarillo = wx.Colour(255, 220, 0)
+        self.listAmarillo.SetBackgroundColour(amarillo)
         bSizer13.Add(self.listAmarillo, 1, wx.ALL | wx.EXPAND, 5)
 
         bSizer151 = wx.BoxSizer(wx.HORIZONTAL)
@@ -105,6 +109,8 @@ class FrmPremios(wx.Dialog):
         self.listRojo.AppendTextColumn(u'Día', width=80)
         self.listRojo.AppendTextColumn(u'Número', width=80)
         self.listRojo.AppendTextColumn(u'Descripción', width=120)
+        rojo = wx.Colour(255, 65, 54)
+        self.listRojo.SetBackgroundColour(rojo)
         bSizer14.Add(self.listRojo, 1, wx.ALL | wx.EXPAND, 5)
 
         bSizer1511 = wx.BoxSizer(wx.HORIZONTAL)
