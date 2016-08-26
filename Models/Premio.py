@@ -31,6 +31,14 @@ class Premio(db.Model):
             dia = "Domingo"
         return dia
 
+    def get_color(self):
+        if(self.color == "V"):
+            return "Verde"
+        if(self.color == "A"):
+            return "Amarillo"
+        if(self.color == "R"):
+            return "Rojo"
+
     def guardar(self):
         db.session.add(self)
         db.session.commit()

@@ -23,6 +23,7 @@ from Views.FrmRegistros import FrmRegistros
 from Views.FrmLogin import FrmLogin
 from Views.FrmPassword import FrmPassword
 from Views.FrmPuerto import FrmPuerto
+from Models.Parametros import Parametros
 
 ###########################################################################
 ## Class FrmMain
@@ -31,7 +32,7 @@ from Views.FrmPuerto import FrmPuerto
 class FrmMain(wx.Frame):
     def __init__(self, parent):
         wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=u"Sorteo", pos=wx.DefaultPosition, size=wx.Size(800, 600),
-                          style=wx.CAPTION | wx.CLOSE_BOX | wx.DEFAULT_FRAME_STYLE | wx.MAXIMIZE | wx.MAXIMIZE_BOX | wx.MINIMIZE | wx.MINIMIZE_BOX)
+                          style=wx.CAPTION | wx.CLOSE_BOX | wx.DEFAULT_FRAME_STYLE | wx.MAXIMIZE | wx.MAXIMIZE_BOX | wx.MINIMIZE_BOX)
 
         self.SetSizeHintsSz(wx.Size(-1, -1), wx.Size(-1, -1))
 
@@ -70,11 +71,16 @@ class FrmMain(wx.Frame):
 
         self.Centre(wx.HORIZONTAL)
 
-        mfrm = FrmLogin(None)
-        mfrm.ShowModal()
-        if(mfrm.login == None):
-            self.Close()
-        mfrm.Destroy()
+        dlg = wx.PasswordEntryDialog(self, u"Ingrese contraseña", u"Semaforo")
+        if(dlg.ShowModal() == wx.ID_OK):
+            password = str(hash(dlg.GetValue()))
+            p = Parametros.query.first()
+            if (str(p.password) != password):
+                self.Destroy()
+            dlg.Destroy()
+        else:
+            self.Destroy()
+            dlg.Destroy()
 
         # Connect Events
         self.Bind(wx.EVT_MENU, self.menu_itemOnMenuSelection, id=self.menu_item.GetId())

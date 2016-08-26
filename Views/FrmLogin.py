@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
-
 import wx
 import wx.xrc
 from Models.Parametros import Parametros
@@ -31,10 +29,10 @@ class FrmLogin(wx.Dialog):
 
         bSizer27 = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.btnAceptar = wx.Button(self, wx.ID_ANY, u"Aceptar", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.btnAceptar = wx.Button(self, wx.ID_OK, u"&OK", wx.DefaultPosition, wx.DefaultSize, 0)
         bSizer27.Add(self.btnAceptar, 0, wx.ALL, 5)
 
-        self.btnCancelar = wx.Button(self, wx.ID_ANY, u"Cancelar", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.btnCancelar = wx.Button(self, wx.ID_CANCEL, u"Cancelar", wx.DefaultPosition, wx.DefaultSize, 0)
         bSizer27.Add(self.btnCancelar, 0, wx.ALL, 5)
 
         bSizer26.Add(bSizer27, 0, wx.ALIGN_RIGHT, 5)
@@ -45,21 +43,23 @@ class FrmLogin(wx.Dialog):
         self.Centre(wx.BOTH)
 
         # Connect Events
-        self.btnAceptar.Bind(wx.EVT_BUTTON, self.btnAceptarOnButtonClick)
-        self.btnCancelar.Bind(wx.EVT_BUTTON, self.btnCancelarOnButtonClick)
+
+        #self.btnAceptar.Bind(wx.EVT_BUTTON, self.btnAceptarOnButtonClick)
+        #self.btnCancelar.Bind(wx.EVT_BUTTON, self.btnCancelarOnButtonClick)
 
     def __del__(self):
         pass
 
     # Virtual event handlers, overide them in your derived class
-    def btnAceptarOnButtonClick(self, event):
-        p = Parametros.query.first()
-        texto = str(hash(self.txtpass.GetValue()))
-        if(str(p.password) == texto):
-            self.login = True
-            self.Close()
-        else:
-            print "Contrasena incorrecta"
+    #def btnAceptarOnButtonClick(self, event):
+    #    p = Parametros.query.first()
+    #    texto = str(hash(self.txtpass.GetValue()))
+    #
+    #    if(str(p.password) == texto):
+    #        self.login = True
+    #        self.Close()
+    #    else:
+    #        print "Contrasena incorrecta"
 
     def btnCancelarOnButtonClick(self, event):
         self.Close()

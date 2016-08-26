@@ -24,7 +24,7 @@ class FrmSemanas(wx.Dialog):
 
         bSizer3 = wx.BoxSizer(wx.VERTICAL)
 
-        self.list = wx.dataview.DataViewListCtrl(self, wx.ID_ANY, wx.DefaultPosition, wx.Size(-1, 350), 0)
+        self.list = wx.dataview.DataViewListCtrl(self, wx.ID_ANY, wx.DefaultPosition, wx.Size(-1, 350))
         self.list.AppendTextColumn(u'Id', width=100)
         self.list.AppendTextColumn(u'Fecha Inicio', width=120)
         self.list.AppendTextColumn(u'Fecha Fin', width=120)
@@ -91,6 +91,8 @@ class FrmSemanas(wx.Dialog):
             premio = Premio.query.filter_by(semana_id=semana.id).first()
             if(premio is None):
                 semana.eliminar()
+            else:
+                wx.MessageBox("No se puede eliminar", "Semaforo", wx.OK | wx.ICON_ERROR)
             self.cargarList()
 
     def btnPremiosOnButtonClick(self, event):

@@ -11,6 +11,7 @@ import wx
 import wx.xrc
 import wx.dataview
 from Models.Pulsacion import Pulsacion
+from Models.Premio import Premio
 from sqlalchemy import desc
 
 ###########################################################################
@@ -26,7 +27,7 @@ class FrmRegistros(wx.Dialog):
 
         bSizer24 = wx.BoxSizer(wx.VERTICAL)
 
-        self.list = wx.dataview.DataViewListCtrl(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
+        self.list = wx.dataview.DataViewListCtrl(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize)
         self.list.AppendTextColumn(u'Fecha', width=80)
         self.list.AppendTextColumn(u'Hora', width=100)
         self.list.AppendTextColumn(u'Número', width=80)
@@ -63,4 +64,9 @@ class FrmRegistros(wx.Dialog):
             day = p.created_at.strftime('%d/%m/%Y')
             hora = p.created_at.strftime('%H:%M')
             numero = str(p.pulsacion)
-            self.list.AppendItem([day, hora, numero, ''])
+            if(p.premio_id is not None):
+                premio = Premio.query.get(p.premio_id)
+                texto = premio.get_color()
+            else:
+                texto = ""
+            self.list.AppendItem([day, hora, numero, texto])

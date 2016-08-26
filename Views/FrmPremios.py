@@ -1,12 +1,5 @@
 # -*- coding: utf-8 -*-
 
-###########################################################################
-## Python code generated with wxFormBuilder (version Jun 17 2015)
-## http://www.wxformbuilder.org/
-##
-## PLEASE DO "NOT" EDIT THIS FILE!
-###########################################################################
-
 import wx
 import wx.xrc
 import wx.dataview
@@ -51,7 +44,7 @@ class FrmPremios(wx.Dialog):
         self.m_staticText4.Wrap(-1)
         bSizer11.Add(self.m_staticText4, 0, wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 5)
 
-        self.listVerde = wx.dataview.DataViewListCtrl(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
+        self.listVerde = wx.dataview.DataViewListCtrl(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize)
         self.listVerde.AppendTextColumn(u'Día', width=80)
         self.listVerde.AppendTextColumn(u'Número', width=80)
         self.listVerde.AppendTextColumn(u'Descripción', width=120)
@@ -78,7 +71,7 @@ class FrmPremios(wx.Dialog):
         self.m_staticText5.Wrap(-1)
         bSizer13.Add(self.m_staticText5, 0, wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 5)
 
-        self.listAmarillo = wx.dataview.DataViewListCtrl(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
+        self.listAmarillo = wx.dataview.DataViewListCtrl(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize)
         self.listAmarillo.AppendTextColumn(u'Día', width=80)
         self.listAmarillo.AppendTextColumn(u'Número', width=80)
         self.listAmarillo.AppendTextColumn(u'Descripción', width=120)
@@ -105,7 +98,7 @@ class FrmPremios(wx.Dialog):
         self.m_staticText6.Wrap(-1)
         bSizer14.Add(self.m_staticText6, 0, wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 5)
 
-        self.listRojo = wx.dataview.DataViewListCtrl(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0)
+        self.listRojo = wx.dataview.DataViewListCtrl(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize)
         self.listRojo.AppendTextColumn(u'Día', width=80)
         self.listRojo.AppendTextColumn(u'Número', width=80)
         self.listRojo.AppendTextColumn(u'Descripción', width=120)
