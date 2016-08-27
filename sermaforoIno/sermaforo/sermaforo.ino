@@ -52,25 +52,26 @@ void loop() {
     char valor = Serial.read();
     if(valor == 'P')
     {
-      digitalWrite(roja, HIGH);
+      digitalWrite(roja, LOW);
       digitalWrite(amarilla, HIGH);
       digitalWrite(verde, HIGH);
       estadoLuzRoja = 0;
       estadoLuzAmarilla = 0;
       estadoLuzVerde = 0;
       delay(2000);
-      digitalWrite(roja, LOW);
+      digitalWrite(roja, HIGH);
       estadoLuzRoja = 1;
     }
     if(valor == 'R')
     {
-      digitalWrite(roja, HIGH);
+      digitalWrite(roja, LOW);
       digitalWrite(amarilla, HIGH);
       digitalWrite(verde, HIGH);
       estadoLuzRoja = 0;
       estadoLuzAmarilla = 0;
       estadoLuzVerde = 0;
-      delay(1000);
+      delay(2000);
+      digitalWrite(roja, HIGH);
       digitalWrite(roja, LOW);
       digitalWrite(timbre, LOW);
       delay(1000);
@@ -119,13 +120,14 @@ void loop() {
     }
     if(valor == 'A')
     {
-      digitalWrite(roja, HIGH);
+      digitalWrite(roja, LOW);
       digitalWrite(amarilla, HIGH);
       digitalWrite(verde, HIGH);
       estadoLuzRoja = 0;
       estadoLuzAmarilla = 0;
       estadoLuzVerde = 0;
-      delay(1000);
+      delay(2000);
+      digitalWrite(roja, HIGH);
       digitalWrite(amarilla, LOW);
       digitalWrite(timbre, LOW);
       delay(1000);
@@ -174,13 +176,14 @@ void loop() {
     }
     if(valor == 'V')
     {
-      digitalWrite(roja, HIGH);
+      digitalWrite(roja, LOW);
       digitalWrite(amarilla, HIGH);
       digitalWrite(verde, HIGH);
       estadoLuzRoja = 0;
       estadoLuzAmarilla = 0;
       estadoLuzVerde = 0;
-      delay(1000);
+      delay(2000);
+      digitalWrite(roja, HIGH);
       digitalWrite(verde, LOW);
       digitalWrite(timbre, LOW);
       delay(1000);
