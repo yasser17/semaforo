@@ -24,6 +24,7 @@ from Views.FrmLogin import FrmLogin
 from Views.FrmPassword import FrmPassword
 from Views.FrmPuerto import FrmPuerto
 from Views.FrmRegistrosDiario import FrmRegistrosDiario
+from Views.FrmAbout import FrmAbout
 from Models.Parametros import Parametros
 
 ###########################################################################
@@ -68,6 +69,12 @@ class FrmMain(wx.Frame):
 
         self.m_menubar1.Append(self.menu3, u"Registro de Pulsaciones")
 
+        self.menu4 = wx.Menu()
+        self.menu_item5 = wx.MenuItem(self.menu4, wx.ID_ANY, u"Acerca de", wx.EmptyString, wx.ITEM_NORMAL)
+        self.menu4.AppendItem(self.menu_item5)
+
+        self.m_menubar1.Append(self.menu4, u"Ayuda")
+
         self.SetMenuBar(self.m_menubar1)
 
         self.Centre(wx.HORIZONTAL)
@@ -90,6 +97,7 @@ class FrmMain(wx.Frame):
         self.Bind(wx.EVT_MENU, self.menu4OnMenuSelection, id=self.menuItem4.GetId())
         self.Bind(wx.EVT_MENU, self.nenu_item_passwordOnMenuSelection, id=self.nenu_item_password.GetId())
         self.Bind(wx.EVT_MENU, self.menu_item_puertoOnMenuSelection, id=self.menu_item_puerto.GetId())
+        self.Bind(wx.EVT_MENU, self.menu_item_aboutOnMenuSelection, id=self.menu_item5.GetId())
 
 
     def __del__(self):
@@ -121,5 +129,11 @@ class FrmMain(wx.Frame):
 
     def menu_item_puertoOnMenuSelection(self, event):
         mfrm = FrmPuerto(None)
+        mfrm.ShowModal()
+        mfrm.Destroy()
+
+
+    def menu_item_aboutOnMenuSelection(self, event):
+        mfrm = FrmAbout(None)
         mfrm.ShowModal()
         mfrm.Destroy()
