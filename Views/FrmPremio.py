@@ -11,8 +11,9 @@ import wx
 import wx.xrc
 from Models.semana import Semana
 from Models.Premio import Premio
+from Models.Pulsacion import Pulsacion
 import datetime
-
+from sqlalchemy import desc
 
 ###########################################################################
 ## Class FrmPremio
@@ -113,7 +114,15 @@ class FrmPremio(wx.Dialog):
         self.lblFecha.SetLabel(self.fecha.strftime('%d/%m/%Y'))
 
     def btnConfirmarOnButtonClick(self, event):
+        if(datetime.datetime.now().date() > self.fecha):
+            self.lblMensaje.SetLabel(u'No se puede agregar para esa fecha')
+            return False
         if(self.txtNumero.GetValue() <= 0):
+            self.lblMensaje.SetLabel(u'Debe seleccionar un valor mayor')
+            return False
+        pul = None
+        pul = Pulsacion.query.filter_by(dia=self.fecha).order_by(desc(Pulsacion.pulsacion)).first()
+        if(pul is not None and pul.pulsacion >= int(self.txtNumero.GetValue())):
             self.lblMensaje.SetLabel(u'Debe seleccionar un valor mayor')
             return False
         p = None
