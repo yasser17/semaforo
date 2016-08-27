@@ -6,6 +6,7 @@ import wx.dataview
 from Models.semana import Semana
 from Views.FrmPremio import FrmPremio
 from Models.Premio import Premio
+from Models.Pulsacion import Pulsacion
 
 
 ###########################################################################
@@ -157,8 +158,13 @@ class FrmPremios(wx.Dialog):
     def btnRemove1OnButtonClick(self, event):
         if(self.listVerde.GetSelectedRow() >= 0):
             premio = self.Verdes[self.listVerde.GetSelectedRow()]
-            premio.borrar()
-            self.cargarListas()
+            pulsacion = None
+            pulsacion = Pulsacion.query.filter_by(dia=premio.fecha, pulsacion=premio.numero).first()
+            if (pulsacion is None):
+                premio.borrar()
+                self.cargarListas()
+            else:
+                wx.MessageBox("No se puede eliminar", "Semaforo", wx.OK | wx.ICON_ERROR)
 
     def btnAdd2OnButtonClick(self, event):
         mfrm = FrmPremio(None, self.semana.id, 'A')
@@ -169,8 +175,13 @@ class FrmPremios(wx.Dialog):
     def btnRemove2OnButtonClick(self, event):
         if (self.listAmarillo.GetSelectedRow() >= 0):
             premio = self.Amarillos[self.listAmarillo.GetSelectedRow()]
-            premio.borrar()
-            self.cargarListas()
+            pulsacion = None
+            pulsacion = Pulsacion.query.filter_by(dia=premio.fecha, pulsacion=premio.numero).first()
+            if (pulsacion is None):
+                premio.borrar()
+                self.cargarListas()
+            else:
+                wx.MessageBox("No se puede eliminar", "Semaforo", wx.OK | wx.ICON_ERROR)
 
     def btnAdd3OnButtonClick(self, event):
         mfrm = FrmPremio(None, self.semana.id, 'R')
@@ -181,8 +192,13 @@ class FrmPremios(wx.Dialog):
     def btnRemove3OnButtonClick(self, event):
         if (self.listRojo.GetSelectedRow() >= 0):
             premio = self.Rojos[self.listRojo.GetSelectedRow()]
-            premio.borrar()
-            self.cargarListas()
+            pulsacion = None
+            pulsacion = Pulsacion.query.filter_by(dia=premio.fecha,pulsacion=premio.numero).first()
+            if(pulsacion is None):
+                premio.borrar()
+                self.cargarListas()
+            else:
+                wx.MessageBox("No se puede eliminar", "Semaforo", wx.OK | wx.ICON_ERROR)
 
     def btnSalirOnButtonClick(self, event):
         self.Close()

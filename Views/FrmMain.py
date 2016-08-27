@@ -23,6 +23,7 @@ from Views.FrmRegistros import FrmRegistros
 from Views.FrmLogin import FrmLogin
 from Views.FrmPassword import FrmPassword
 from Views.FrmPuerto import FrmPuerto
+from Views.FrmRegistrosDiario import FrmRegistrosDiario
 from Models.Parametros import Parametros
 
 ###########################################################################
@@ -86,6 +87,7 @@ class FrmMain(wx.Frame):
         self.Bind(wx.EVT_MENU, self.menu_itemOnMenuSelection, id=self.menu_item.GetId())
         self.Bind(wx.EVT_MENU, self.menuItem2OnMenuSelection, id=self.menuItem2.GetId())
         self.Bind(wx.EVT_MENU, self.menu3OnMenuSelection, id=self.menuItem3.GetId())
+        self.Bind(wx.EVT_MENU, self.menu4OnMenuSelection, id=self.menuItem4.GetId())
         self.Bind(wx.EVT_MENU, self.nenu_item_passwordOnMenuSelection, id=self.nenu_item_password.GetId())
         self.Bind(wx.EVT_MENU, self.menu_item_puertoOnMenuSelection, id=self.menu_item_puerto.GetId())
 
@@ -103,6 +105,11 @@ class FrmMain(wx.Frame):
         mfrm.Destroy()
 
     def menu3OnMenuSelection(self, event):
+        mfrm = FrmRegistrosDiario(None)
+        mfrm.ShowModal()
+        mfrm.Destroy()
+
+    def menu4OnMenuSelection(self, event):
         mfrm = FrmRegistros(None)
         mfrm.ShowModal()
         mfrm.Destroy()
