@@ -9,9 +9,6 @@ class Semana(db.Model):
     fechaInicio = db.Column(db.DateTime)
     fechaFin = db.Column(db.DateTime)
     estado_id = db.Column(db.Integer)
-    created_at = db.Column(db.DateTime)
-    updated_at = db.Column(db.DateTime)
-    deleted_at = db.Column(db.DateTime)
 
     def guardar(self):
         db.session.add(self)

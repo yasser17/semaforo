@@ -10,9 +10,6 @@ class Premio(db.Model):
     color = db.Column(db.String)
     descripcion = db.Column(db.String)
     obsequiado = db.Column(db.DateTime)
-    created_at = db.Column(db.DateTime)
-    updated_at = db.Column(db.DateTime)
-    deleted_at = db.Column(db.DateTime)
 
     def get_dia(self):
         if (self.fecha.weekday() == 0):

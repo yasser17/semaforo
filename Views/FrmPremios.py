@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import os
 import wx
 import wx.xrc
 import wx.dataview
@@ -7,11 +8,14 @@ from Models.semana import Semana
 from Views.FrmPremio import FrmPremio
 from Models.Premio import Premio
 from Models.Pulsacion import Pulsacion
+import fpdf
+from fpdf import FPDF
 
 
 ###########################################################################
 ## Class FrmPremios
 ###########################################################################
+
 
 class FrmPremios(wx.Dialog):
     semana = None
@@ -121,12 +125,15 @@ class FrmPremios(wx.Dialog):
 
         bSizer8.Add(bSizer10, 1, wx.EXPAND, 5)
 
-        bSizer22 = wx.BoxSizer(wx.VERTICAL)
+        bSizer22 = wx.BoxSizer(wx.HORIZONTAL)
+
+        self.btnExportar = wx.Button(self, wx.ID_ANY, u"Exportar a PDF", wx.DefaultPosition, wx.DefaultSize, 0)
+        bSizer22.Add(self.btnExportar, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
 
         self.btnSalir = wx.Button(self, wx.ID_ANY, u"Salir", wx.DefaultPosition, wx.DefaultSize, 0)
-        bSizer22.Add(self.btnSalir, 0, wx.ALL | wx.ALIGN_RIGHT, 5)
+        bSizer22.Add(self.btnSalir, 0, wx.ALL | wx.ALIGN_RIGHT | wx.EXPAND | wx.ALIGN_CENTER_VERTICAL, 5)
 
-        bSizer8.Add(bSizer22, 0, wx.EXPAND, 5)
+        bSizer8.Add(bSizer22, 0, wx.ALIGN_RIGHT, 5)
 
         self.SetSizer(bSizer8)
         self.Layout()
@@ -142,6 +149,7 @@ class FrmPremios(wx.Dialog):
         self.btnRemove2.Bind(wx.EVT_BUTTON, self.btnRemove2OnButtonClick)
         self.btnAdd3.Bind(wx.EVT_BUTTON, self.btnAdd3OnButtonClick)
         self.btnRemove3.Bind(wx.EVT_BUTTON, self.btnRemove3OnButtonClick)
+        self.btnExportar.Bind(wx.EVT_BUTTON, self.btnExportarOnButtonClick)
         self.btnSalir.Bind(wx.EVT_BUTTON, self.btnSalirOnButtonClick)
 
     def __del__(self):
@@ -199,6 +207,44 @@ class FrmPremios(wx.Dialog):
                 self.cargarListas()
             else:
                 wx.MessageBox("No se puede eliminar", "Semaforo", wx.OK | wx.ICON_ERROR)
+
+    def btnExportarOnButtonClick(self, event):
+        dlg = wx.FileDialog(
+            self, message="Guardar archivo como ...", defaultDir=os.getcwd(),
+            defaultFile="prueba", wildcard="Archivo PDF (*.pdf)|*.pdf", style=wx.SAVE
+        )
+
+        if dlg.ShowModal() == wx.ID_OK:
+            path = dlg.GetPath()
+            count = 0
+
+            pdf = FPDF('P', 'mm', 'A4')
+            pdf.add_page()
+            pdf.set_font('Arial', '', 12)
+
+            pdf.set_text_color(0,116,217)
+            pdf.cell(190, 12, ('Registro de premios para la semana %s' % (self.semana.fechaInicio.strftime('%d/%m/%Y'))),
+                     0, 1, 'C')
+            pdf.set_text_color(0,0,0)
+
+            pdf.cell(40, 10, u"Fecha", 1, 0)
+            pdf.cell(40, 10, u"Día de la semana", 1, 0)
+            pdf.cell(40, 10, u"Color", 1, 0)
+            pdf.cell(40, 10, u"Número", 1, 1)
+
+            pV = Premio.query.filter_by(semana_id=self.semana.id).order_by(Premio.fecha).order_by(Premio.numero).all()
+
+            for premio in pV:
+                pdf.cell(40, 12, premio.fecha.strftime('%d/%m/%Y'), 0, 0)
+                pdf.cell(40, 12, premio.get_dia(), 0, 0)
+                pdf.cell(40, 12, premio.get_color(), 0, 0)
+                pdf.cell(40, 12, str(premio.numero), 0, 1)
+
+            pdf.output(path, 'F')
+
+
+
+        dlg.Destroy()
 
     def btnSalirOnButtonClick(self, event):
         self.Close()
