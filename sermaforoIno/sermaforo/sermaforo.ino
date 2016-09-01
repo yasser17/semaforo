@@ -60,6 +60,14 @@ void loop() {
       estadoLuzVerde = 0;
       delay(2000);
       digitalWrite(roja, HIGH);
+      delay(500);
+      digitalWrite(roja, LOW);
+      delay(2000);
+      digitalWrite(roja, HIGH);
+      delay(500);
+      digitalWrite(roja, LOW);
+      delay(2000);
+      digitalWrite(roja, HIGH);
       estadoLuzRoja = 1;
     }
     if(valor == 'R')
